@@ -1,0 +1,11 @@
+{
+    "name": "One-Second-A-Day",
+    "version": "0.0.1",
+    "description": "A TED Talk inspired me to make this",
+    "dependencies": {
+        "coffee-script": "~1.4.0",
+        "express": "3.x",
+        "sequelize": "~1.6.0",
+        "jade": "0.28.1",
+    }
+}
