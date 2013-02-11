@@ -1,6 +1,11 @@
 Sequelize = require('sequelize')
+config = require('../../config/config.coffee').config
 
-Users = Sequelize.define('Users',
+sequelize = new Sequelize(config.database.database,
+    config.database.username,
+    config.database.password)
+
+Users = sequelize.define('Users',
     
     username:
         type: Sequelize.STRING

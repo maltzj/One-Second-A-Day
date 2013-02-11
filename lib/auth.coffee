@@ -1,7 +1,8 @@
+require('coffee-script')
 Users = require('./models/UserModel').Users
 sequelize = require('sequelize')
 
-class Authentication:
+class Authentication
     
     Users.sync()
 
@@ -13,11 +14,13 @@ class Authentication:
                 username: username
                 password: password
         ).success( (result) ->
-            
+          
+            if !result then return callback(null, false)
             return callback(null, result)
         ).error( (error) ->
 
             return callback(error)
         )
 
-            
+           
+exports.Auth = Authentication
