@@ -22,5 +22,19 @@ class Authentication
             return callback(error)
         )
 
+    getUserById: (id, cb) ->
+
+        callback = if cb then cb else () ->
+        Users.find(
+            where:
+                id: id
+        ).success( (result) ->
+        
+            return callback(null, result)
+        ).error( (error) ->
+            
+            return callback(error)
+        )
+
            
 exports.Auth = Authentication
