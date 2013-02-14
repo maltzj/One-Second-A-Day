@@ -8,6 +8,7 @@
         "sequelize": "~1.6.0",
         "jade": "0.28.1",
         "passport": "0.1.15",
-        "passport-local": "0.1.6"
+        "passport-local": "0.1.6",
+        "connect-flash": "0.1.0"
     }
 }

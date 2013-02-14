@@ -1,4 +1,5 @@
 require('coffee-script')
+flash = require('connect-flash')
 express = require('express')
 passport = require('passport')
 LocalStrategy = require('passport-local').Strategy
@@ -20,14 +21,27 @@ passport.use(new LocalStrategy(
 ))
 
 app = express()
-app.use(express.bodyParser())
-app.use(passport.initialize())
-app.use(passport.session())
+app.configure(
+    app.use(express.bodyParser())
+    app.set('view engine', 'jade')
+    app.use(express.cookieParser('keyboard cat'))
+    app.use(express.session({cookie: {maxAge: 60000}}))
+    app.use(passport.initialize())
+    app.use(passport.session())
+    app.use(flash())
+)
+
+app.get('/', (req, res) ->
+
+    res.write('Hello World')
+    res.end()
+)
 
 app.get('/login', (req, res) ->
-    
-    res.render('../templates/login.jade',
-        username: 'James'
+   
+    res.render('../templates/login.jade', {}, (err, html) ->
+        
+        res.write(html)
     )
     res.end()
 )
@@ -35,6 +49,7 @@ app.get('/login', (req, res) ->
 app.post('/login',
    passport.authenticate('local',
        failureRedirect: '/login'
+       failureFlash: true
    ), (req, res) ->
 
        console.dir(req)
@@ -42,7 +57,7 @@ app.post('/login',
        res.write('Success')
        res.end()
    )
-   
+  
 
 
 app.listen(8080)

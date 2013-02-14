@@ -15,7 +15,7 @@ class Authentication
                 password: password
         ).success( (result) ->
           
-            if !result then return callback(null, false)
+            if !result then return callback(null, false, "This is my message")
             return callback(null, result)
         ).error( (error) ->
 
