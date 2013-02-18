@@ -1,18 +1,13 @@
-doctype 5
+extends layout
 
--if(typeof username === "undefined"){
-    -username = ''
--}
-html
-    head
-        title= "One Video A Day"
-    body
-        form(method='POST')
-            label 
-                | Username: 
-                input(name="username", type="textbox", value="#{username}" )
-            label
-                | Password:
-                input(name="password", type="password")
-            input(type="submit", type="submit")
+block content
+    form(method='POST')
+        label 
+            | Username: 
+            input(name="username", type="text", 
+                value="#{test = locals.username ? locals.username : ''}")
+            
+            | Password:
+            input(name="password", type="password")
+       input(type="submit")
 

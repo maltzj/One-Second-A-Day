@@ -30,8 +30,12 @@ passport.use(new LocalStrategy(
 app = express()
 
 app.configure(
+    app.use(express.static(__dirname + '/public'))
     app.use(express.bodyParser())
     app.set('view engine', 'jade')
+    app.set('view options',
+        layout: false
+    )
     app.use(express.cookieParser('keyboard cat'))
     app.use(express.session({cookie: {maxAge: 60000}}))
     app.use(passport.initialize())
@@ -48,7 +52,8 @@ app.get('/', (req, res) ->
 app.get('/login', (req, res) ->
    
     res.render('../templates/login.jade', {}, (err, html) ->
-        
+       
+        console.log('html is ' + err)
         res.write(html)
         res.end()
     )
