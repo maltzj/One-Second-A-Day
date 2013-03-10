@@ -1,13 +1,12 @@
 extends layout
 
 block content
-    form(method='POST')
-        label 
-            | Username: 
-            input(name="username", type="text", 
-                value="#{test = locals.username ? locals.username : ''}")
-            
-            | Password:
-            input(name="password", type="password")
-       input(type="submit")
+    form(method='POST').form-signin
+        h2 Please Sign In
+        input(name="username", type="text", placeholder="Username"
+            value="#{test = locals.username ? locals.username:''}"
+                ).input-block-level
+        input(name="password", type="password", placeholder="Password"
+                ).input-block-level
+        input(type="submit").btn
 

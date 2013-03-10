@@ -22,8 +22,9 @@ passport.deserializeUser( (id, done) ->
 
 
 passport.use(new LocalStrategy(
-    (username, password, done) ->
-        
+    passReqToCallback: true
+    (req, username, password, done) ->
+        req.flash('username', username)
         authentication.login(username, password, done)
 ))
 
@@ -51,16 +52,17 @@ app.get('/', (req, res) ->
 
 app.get('/login', (req, res) ->
    
-    res.render('../templates/login.jade', {}, (err, html) ->
+    username = req.flash('username')[0]
+
+    res.render('../templates/login.jade', {username: username}, (err, html) ->
        
-        console.log('html is ' + err)
         res.write(html)
         res.end()
     )
 )
 
 app.post('/login',
-   passport.authenticate('local',
+passport.authenticate('local',
        failureRedirect: '/login'
        failureFlash: true
    ), (req, res) ->
